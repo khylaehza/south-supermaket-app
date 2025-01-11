@@ -1,65 +1,67 @@
 {
-  "expo": {
-    "name": "south-supermarket",
-    "slug": "south-supermarket",
-    "version": "1.0.0",
-    "orientation": "portrait",
-    "icon": "./assets/south-icon.png",
-    "userInterfaceStyle": "light",
-    "splash": {
-      "image": "./assets/splash-south.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
-    "ios": {
-      "supportsTablet": true
-    },
-    "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/south-icon.png",
-        "backgroundColor": "#ffffff"
-      },
-      "permissions": [
-        "CAMERA",
-        "INTERNET",
-        "CAMERA_ROLL",
-        "ACCESS_NETWORK_STATE",
-        "ACCESS_WIFI_STATE",
-        "CHANGE_WIFI_STATE",
-        "ACCESS_FINE_LOCATION",
-        "ACCESS_COARSE_LOCATION",
-        "CHANGE_NETWORK_STATE",
-        "WRITE_SETTINGS",
-        "android.permission.CAMERA",
-        "android.permission.RECORD_AUDIO"
-      ],
-      "package": "com.khylaehza.southsupermarket"
-    },
-    "web": {
-      "favicon": "./assets/favicon.png"
-    },
-    "plugins": [
-      [
-        "expo-camera",
-        {
-          "cameraPermission": "Allow South Supermarket App to access your camera."
-        }
-      ],
-      [
-        "expo-build-properties",
-        {
-          "android": {
-            "usesCleartextTraffic": true
-          }
-        }
-      ],
-      "expo-font"
-    ],
-    "extra": {
-      "eas": {
-        "projectId": "74f89f01-6419-4cb8-bedc-a35f89adb28e"
-      }
-    },
-    "owner": "khylaehza"
-  }
+	"expo": {
+		"newArchEnabled": false,
+		"name": "south-supermarket",
+		"slug": "south-supermarket",
+		"version": "1.0.0",
+		"orientation": "portrait",
+		"icon": "./assets/south-icon.png",
+		"userInterfaceStyle": "light",
+		"splash": {
+			"image": "./assets/splash-south.png",
+			"resizeMode": "contain",
+			"backgroundColor": "#ffffff"
+		},
+		"ios": {
+			"supportsTablet": true,
+			"bundleIdentifier": "com.khylaehza.southsupermarket"
+		},
+		"android": {
+			"adaptiveIcon": {
+				"foregroundImage": "./assets/south-icon.png",
+				"backgroundColor": "#ffffff"
+			},
+			"permissions": [
+				"CAMERA",
+				"INTERNET",
+				"CAMERA_ROLL",
+				"ACCESS_NETWORK_STATE",
+				"ACCESS_WIFI_STATE",
+				"CHANGE_WIFI_STATE",
+				"ACCESS_FINE_LOCATION",
+				"ACCESS_COARSE_LOCATION",
+				"CHANGE_NETWORK_STATE",
+				"WRITE_SETTINGS",
+				"android.permission.CAMERA",
+				"android.permission.RECORD_AUDIO"
+			],
+			"package": "com.khylaehza.southsupermarket"
+		},
+		"web": {
+			"favicon": "./assets/favicon.png"
+		},
+		"plugins": [
+			[
+				"expo-camera",
+				{
+					"cameraPermission": "Allow South Supermarket App to access your camera."
+				}
+			],
+			[
+				"expo-build-properties",
+				{
+					"android": {
+						"usesCleartextTraffic": true
+					}
+				}
+			],
+			"expo-font"
+		],
+		"extra": {
+			"eas": {
+				"projectId": "74f89f01-6419-4cb8-bedc-a35f89adb28e"
+			}
+		},
+		"owner": "khylaehza"
+	}
 }

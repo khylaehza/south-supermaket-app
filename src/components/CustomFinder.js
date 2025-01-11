@@ -12,12 +12,8 @@ import {
 } from '@gluestack-ui/themed';
 import { useData } from '../../DataContext';
 import { useNavigation } from '@react-navigation/native';
-import { ToastAndroid } from 'react-native';
+import { Platform, ToastAndroid } from 'react-native';
 import axios from 'axios';
-import TetheringManager, {
-	Event,
-	TetheringError,
-} from '@react-native-tethering/wifi';
 import { useState } from 'react';
 const CustomFinder = ({
 	itemData,
@@ -36,7 +32,7 @@ const CustomFinder = ({
 	const ViewPress = async (item) => {
 		const NODEMCU_IP_ADDRESS = '192.168.254.108';
 		const NODEMCU_PORT = 80;
-		const ip = TetheringManager.getDeviceIP();
+
 		const url = `http://${NODEMCU_IP_ADDRESS}:${NODEMCU_PORT}/${item.prod_code}`;
 		const matchedLock = lock.find((l) => l.post === item.prod_post);
 		if (matchedLock) {
@@ -52,7 +48,7 @@ const CustomFinder = ({
 
 			await axios({
 				method: 'post',
-				url: `https://bmcforreserve.com/public/php_scripts/edit_statuslock.php`,
+				url: `https://southsupermarket.nickoaganan.tk/public/php_scripts/edit_statuslock.php`,
 				data: formData,
 				headers: {
 					'Content-Type': 'multipart/form-data',
@@ -164,7 +160,7 @@ const CustomFinder = ({
 								>
 									<Image
 										source={{
-											uri: `https://bmcforreserve.com/uploads/${item.image}`,
+											uri: `https://southsupermarket.nickoaganan.tk/public/${item.image}`,
 										}}
 										size='sm'
 										objectFit='cover'

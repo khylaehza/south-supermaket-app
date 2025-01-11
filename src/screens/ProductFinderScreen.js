@@ -1,4 +1,5 @@
-import { View, ScrollView, ToastAndroid } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, ScrollView, ToastAndroid, Platform, Alert } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Styles } from '../themes';
 import { HStack, Box, Button } from '@gluestack-ui/themed';
@@ -12,33 +13,27 @@ import { Colors } from '../themes';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { useData } from '../../DataContext';
-
-import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import TetheringManager, {
-	Event,
-	TetheringError,
-} from '@react-native-tethering/wifi';
-
 import * as Location from 'expo-location';
+
+let TetheringManager, Event, TetheringError;
+
+if (Platform.OS === 'android') {
+	// Import TetheringManager only on Android
+	TetheringManager = require('@react-native-tethering/wifi').default;
+	Event = require('@react-native-tethering/wifi').Event;
+	TetheringError = require('@react-native-tethering/wifi').TetheringError;
+}
 
 const ProductFinderScreen = () => {
 	const navigation = useNavigation();
 	const insets = useSafeAreaInsets();
 	const [isConnected, setConnected] = useState(false);
-	const {
-		control,
-		handleSubmit,
-		formState: { errors },
-		watch,
-		reset,
-		// getValues,
-		clearErrors,
-	} = useForm({ values: { search: '' } });
+	const { control, watch } = useForm({ values: { search: '' } });
 	const { products, discProducts, cart, announcement } = useData();
 	const searchVal = watch('search');
-	const checkProd = products != '0 results' ? products : [];
-	const discProd = discProducts != '0 results' ? discProducts : [];
+	const checkProd = products !== '0 results' ? products : [];
+	const discProd = discProducts !== '0 results' ? discProducts : [];
 	const allProd = [...checkProd, ...discProd];
 
 	useEffect(() => {
@@ -55,16 +50,64 @@ const ProductFinderScreen = () => {
 	}, []);
 
 	useEffect(() => {
-		const subscriber = TetheringManager.addEventListener(
-			Event.OnNetworkDisconnected,
-			() => {
-				// disconnected from the network
-				console.log(subscriber);
-			}
-		);
+		if (Platform.OS === 'android' && TetheringManager) {
+			const subscriber = TetheringManager.addEventListener(
+				Event.OnNetworkDisconnected,
+				() => {
+					console.log('Disconnected from the network');
+				}
+			);
 
-		return () => subscriber.remove();
+			return () => subscriber.remove();
+		}
 	}, []);
+
+	const connectWifi = async () => {
+		if (Platform.OS === 'android' && TetheringManager) {
+			try {
+				const state = await TetheringManager.isWifiEnabled();
+
+				if (state) {
+					try {
+						await TetheringManager.connectToNetwork({
+							ssid: 'DIY-TAG',
+							password: 'diytagtapandgo',
+							isHidden: true,
+						});
+						setConnected(true);
+					} catch (error) {
+						if (error instanceof TetheringError) {
+							ToastAndroid.show(error.message, ToastAndroid.LONG);
+						}
+						console.log(error);
+					}
+				} else {
+					try {
+						await TetheringManager.setWifiEnabled();
+						ToastAndroid.show(
+							`Turn on the WiFi and click "Connect to WiFi" again.`,
+							ToastAndroid.SHORT
+						);
+					} catch (error) {
+						if (error instanceof TetheringError) {
+							ToastAndroid.show(error.message, ToastAndroid.LONG);
+						}
+						console.log(error);
+					}
+				}
+			} catch (error) {
+				if (error instanceof TetheringError) {
+					ToastAndroid.show(error.message, ToastAndroid.LONG);
+				}
+				console.log(error);
+			}
+		} else {
+			Alert.alert(
+				'Connect to WiFi',
+				'Please connect to the grocery’s WiFi network via your iOS settings.'
+			);
+		}
+	};
 
 	const onCartPress = () => {
 		navigation.navigate('Cart');
@@ -72,46 +115,6 @@ const ProductFinderScreen = () => {
 
 	const onAnnouncePress = () => {
 		navigation.navigate('Announcement');
-	};
-
-	const connectWifi = async () => {
-		try {
-			const state = await TetheringManager.isWifiEnabled();
-
-			if (state) {
-				try {
-					await TetheringManager.connectToNetwork({
-						ssid: 'DIY-TAG',
-						password: 'diytagtapandgo',
-						isHidden: true,
-					});
-					setConnected(true);
-				} catch (error) {
-					if (error instanceof TetheringError) {
-						ToastAndroid.show(error.message, ToastAndroid.LONG);
-					}
-					console.log(error);
-				}
-			} else {
-				try {
-					await TetheringManager.setWifiEnabled();
-					ToastAndroid.show(
-						`Turn on the wifi and click connect to wifi again.`,
-						ToastAndroid.SHORT
-					);
-				} catch (error) {
-					if (error instanceof TetheringError) {
-						ToastAndroid.show(error.message, ToastAndroid.LONG);
-					}
-					console.log(error);
-				}
-			}
-		} catch (error) {
-			if (error instanceof TetheringError) {
-				ToastAndroid.show(error.message, ToastAndroid.LONG);
-			}
-			console.log(error);
-		}
 	};
 
 	return (
@@ -222,25 +225,21 @@ const ProductFinderScreen = () => {
 				</View>
 
 				{isConnected ? (
-					<>
-						<ScrollView showsVerticalScrollIndicator={false}>
-							<View
-								style={{ width: '100%', padding: 30, gap: 30 }}
-							>
-								<CustomSearch
-									name={`search`}
-									control={control}
-									placeholder={'Search products...'}
-								/>
-								<CustomFinder
-									itemData={Object.values(allProd)}
-									details={false}
-									size={11}
-									searchVal={searchVal}
-								/>
-							</View>
-						</ScrollView>
-					</>
+					<ScrollView showsVerticalScrollIndicator={false}>
+						<View style={{ width: '100%', padding: 30, gap: 30 }}>
+							<CustomSearch
+								name={`search`}
+								control={control}
+								placeholder={'Search products...'}
+							/>
+							<CustomFinder
+								itemData={Object.values(allProd)}
+								details={false}
+								size={11}
+								searchVal={searchVal}
+							/>
+						</View>
+					</ScrollView>
 				) : (
 					<View
 						style={{
@@ -253,7 +252,7 @@ const ProductFinderScreen = () => {
 						}}
 					>
 						<CustomText
-							text={"Not connected on grocery's network."}
+							text={"Not connected to the grocery's network."}
 							type='PRIMARY'
 							color={Colors.green300}
 							size={18}

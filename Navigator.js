@@ -32,9 +32,8 @@ import {
 	ScanScreen,
 	WishlistScreen,
 	AnnouncementScreen,
-	PaymongoScreen
+	PaymongoScreen,
 } from './src/screens';
-
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Colors } from './src/themes';
@@ -118,7 +117,7 @@ const TabNavigator = () => {
 					),
 				}}
 			/>
-			
+
 			<Tab.Screen
 				name='Profile'
 				component={ProfileScreen}

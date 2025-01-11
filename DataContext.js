@@ -1,5 +1,4 @@
 import { useState, useContext, useEffect, createContext } from 'react';
-
 import axios from 'axios';
 
 const DataContext = createContext();
@@ -7,8 +6,9 @@ const DataContext = createContext();
 export const useData = () => {
 	return useContext(DataContext);
 };
+
 const DataProvider = ({ children }) => {
-	const url = 'https://bmcforreserve.com/public/php_scripts';
+	const url = 'https://southsupermarket.nickoaganan.tk/public/php_scripts';
 	const [cart, setCart] = useState([]);
 	const [curUser, setCurUser] = useState({});
 	const [products, setProducts] = useState([{}]);
@@ -17,9 +17,9 @@ const DataProvider = ({ children }) => {
 	const [announcement, setAnnouncement] = useState([]);
 	const [users, setUsers] = useState([]);
 
+	// Fetch users initially and on interval
 	useEffect(() => {
 		fetchUsers();
-
 		const interval = setInterval(() => {
 			fetchUsers();
 		}, 30000);
@@ -27,6 +27,7 @@ const DataProvider = ({ children }) => {
 		return () => clearInterval(interval);
 	}, []);
 
+	// Update current user when users change
 	useEffect(() => {
 		const currentUserToUpdate = users.find(
 			(user) => user.username === curUser.username
@@ -35,7 +36,7 @@ const DataProvider = ({ children }) => {
 		if (currentUserToUpdate) {
 			setCurUser(currentUserToUpdate);
 		}
-	}, [users, curUser]);
+	}, [users, curUser.username]);
 
 	const fetchUsers = async () => {
 		try {
@@ -46,6 +47,7 @@ const DataProvider = ({ children }) => {
 		}
 	};
 
+	// Update cart based on changes and periodically filter out zero-quantity items
 	useEffect(() => {
 		const intervalId = setInterval(() => {
 			const updatedCart = Object.fromEntries(
@@ -53,18 +55,17 @@ const DataProvider = ({ children }) => {
 					([key, item]) => item.quantity !== 0
 				)
 			);
-
 			setCart(updatedCart);
 		}, 50000);
 
 		return () => clearInterval(intervalId);
-	}, [cart, setCart]);
+	}, [cart]);
 
+	// Fetch products
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
 				const response = await axios.get(`${url}/get_products.php`);
-
 				setProducts(response.data);
 			} catch (error) {
 				console.log('error');
@@ -74,6 +75,7 @@ const DataProvider = ({ children }) => {
 		fetchData();
 	}, []);
 
+	// Fetch discounted products
 	const [discProducts, setDiscProducts] = useState([{}]);
 	useEffect(() => {
 		const fetchData = async () => {
@@ -90,8 +92,8 @@ const DataProvider = ({ children }) => {
 		fetchData();
 	}, []);
 
+	// Fetch transactions for the current user
 	const [transactions, setTransactions] = useState([{}]);
-
 	const fetchTrans = async () => {
 		try {
 			const response = await axios.get(`${url}/get_transaction.php`);
@@ -114,10 +116,10 @@ const DataProvider = ({ children }) => {
 		fetchTrans();
 		const intervalId = setInterval(fetchTrans, 50000);
 		return () => clearInterval(intervalId);
-	}, [transactions, setTransactions]);
+	}, [curUser.id]); // Only depend on curUser.id to prevent infinite loop
 
+	// Fetch sales data for the current user
 	const [sales, setSales] = useState([{}]);
-
 	const fetchSales = async () => {
 		try {
 			const response = await axios.get(`${url}/get_sales.php`);
@@ -140,8 +142,9 @@ const DataProvider = ({ children }) => {
 		fetchSales();
 		const intervalId = setInterval(fetchSales, 50000);
 		return () => clearInterval(intervalId);
-	}, [sales, setSales]);
+	}, [curUser.id]); // Only depend on curUser.id to prevent infinite loop
 
+	// Fetch lock data
 	const [lock, setLock] = useState([{}]);
 	useEffect(() => {
 		const fetchData = async () => {
@@ -155,6 +158,7 @@ const DataProvider = ({ children }) => {
 
 		fetchData();
 	}, []);
+
 	const value = {
 		url,
 		products,

@@ -1,50 +1,65 @@
 {
-  "name": "south-supermarket",
-  "version": "1.0.0",
-  "main": "expo/AppEntry.js",
-  "scripts": {
-    "start": "expo start",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
-    "web": "expo start --web"
-  },
-  "dependencies": {
-    "@expo/vector-icons": "^14.0.2",
-    "@gluestack-style/react": "^1.0.56",
-    "@gluestack-ui/config": "^1.1.18",
-    "@gluestack-ui/themed": "^1.1.26",
-    "@kichiyaki/react-native-barcode-generator": "^0.6.7",
-    "@react-native-tethering/wifi": "^1.0.0",
-    "@react-navigation/bottom-tabs": "^6.5.20",
-    "@react-navigation/native": "^6.1.17",
-    "@react-navigation/native-stack": "^6.9.26",
-    "axios": "^1.6.8",
-    "base-64": "^1.0.0",
-    "expo": "~51.0.6",
-    "expo-build-properties": "^0.12.1",
-    "expo-camera": "~15.0.8",
-    "expo-font": "^12.0.5",
-    "expo-image-picker": "^15.0.4",
-    "expo-location": "^17.0.1",
-    "expo-status-bar": "~1.12.1",
-    "link": "^2.1.1",
-    "moment": "^2.30.1",
-    "react": "^18.2.0",
-    "react-hook-form": "^7.51.4",
-    "react-native": "^0.74.1",
-    "react-native-credit-card-form-ui": "^1.2.5",
-    "react-native-image-pan-zoom": "^2.1.12",
-    "react-native-qrcode-svg": "^6.3.1",
-    "react-native-root-siblings": "^5.0.1",
-    "react-native-safe-area-context": "4.10.1",
-    "react-native-screens": "^3.31.1",
-    "react-native-svg": "^15.2.0",
-    "react-native-vector-icons": "^10.1.0",
-    "react-native-webview": "^13.8.6"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.20.0",
-    "@types/react-native-vector-icons": "^6.4.18"
-  },
-  "private": true
+	"name": "south-supermarket",
+	"version": "1.0.0",
+	"main": "expo/AppEntry.js",
+	"scripts": {
+		"start": "expo start",
+		"android": "expo start --android",
+		"ios": "expo start --ios",
+		"web": "expo start --web"
+	},
+	"dependencies": {
+		"@expo/vector-icons": "^14.0.2",
+		"@gluestack-style/react": "^1.0.56",
+		"@gluestack-ui/config": "^1.1.18",
+		"@gluestack-ui/themed": "^1.1.26",
+		"@react-native-tethering/wifi": "^1.0.0",
+		"@react-navigation/bottom-tabs": "^6.5.20",
+		"@react-navigation/native": "^6.1.17",
+		"@react-navigation/native-stack": "^6.9.26",
+		"axios": "^1.6.8",
+		"base-64": "^1.0.0",
+		"expo": "^52.0.25",
+		"expo-build-properties": "^0.13.2",
+		"expo-camera": "~16.0.11",
+		"expo-font": "~13.0.3",
+		"expo-image-picker": "~16.0.4",
+		"expo-location": "~18.0.5",
+		"expo-status-bar": "~2.0.1",
+		"moment": "^2.30.1",
+		"react": "18.3.1",
+		"react-dom": "18.3.1",
+		"react-hook-form": "^7.51.4",
+		"react-native": "0.76.6",
+		"react-native-credit-card-form-ui": "^1.2.5",
+		"react-native-image-pan-zoom": "^2.1.12",
+		"react-native-qrcode-svg": "^6.3.1",
+		"react-native-root-siblings": "^5.0.1",
+		"react-native-safe-area-context": "4.12.0",
+		"react-native-screens": "~4.4.0",
+		"react-native-svg": "15.8.0",
+		"react-native-vector-icons": "^10.1.0",
+		"react-native-webview": "^13.12.5"
+	},
+	"devDependencies": {
+		"@types/react-native-vector-icons": "^6.4.18"
+	},
+	"private": true,
+	"expo": {
+		"doctor": {
+			"reactNativeDirectoryCheck": {
+				"exclude": [
+					"react-native-image-pan-zoom",
+					"@gluestack-style/react",
+					"@gluestack-ui/config",
+					"@gluestack-ui/themed",
+					"@react-native-tethering/wifi",
+					"base-64",
+					"moment",
+					"react-native-credit-card-form-ui"
+				],
+				"listUnknownPackages": false
+			}
+		}
+	}
 }

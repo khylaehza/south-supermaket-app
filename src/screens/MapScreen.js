@@ -38,7 +38,7 @@ const MapScreen = ({ route }) => {
 
 			await axios({
 				method: 'post',
-				url: `https://bmcforreserve.com/public/php_scripts/edit_statuslock.php`,
+				url: `https://southsupermarket.nickoaganan.tk/public/php_scripts/edit_statuslock.php`,
 				data: formData,
 				headers: {
 					'Content-Type': 'multipart/form-data',

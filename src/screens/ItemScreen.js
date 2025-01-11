@@ -124,7 +124,7 @@ const ItemScreen = ({ route }) => {
 						>
 							<Image
 								source={{
-									uri: `https://bmcforreserve.com/uploads/${info.image}`,
+									uri: `https://southsupermarket.nickoaganan.tk/public/${info.image}`,
 								}}
 								w={'100%'}
 								h={'100%'}

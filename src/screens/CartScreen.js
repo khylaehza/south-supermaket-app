@@ -330,7 +330,7 @@ const CartScreen = () => {
 													/>
 													<Image
 														source={{
-															uri: `https://bmcforreserve.com/uploads/${item.image}`,
+															uri: `https://southsupermarket.nickoaganan.tk/public/${item.image}`,
 														}}
 														size={'xs'}
 														h={'50%'}

@@ -217,14 +217,14 @@ const ProductsScreen = () => {
 								align={'left'}
 								size={16}
 							/>
-							<CustomText
+							{/* <CustomText
 								text={'View All >'}
 								type='PRIMARY'
 								color={Colors.green300}
 								align={'right'}
 								size={12}
 								font='Rubik-Regular'
-							/>
+							/> */}
 						</HStack>
 						<View style={{ gap: 25, display: 'flex' }}>
 							<ScrollView
@@ -299,7 +299,7 @@ const ProductsScreen = () => {
 															>
 																<Image
 																	source={{
-																		uri: `https://bmcforreserve.com/uploads/${item.image}`,
+																		uri: `https://southsupermarket.nickoaganan.tk/public/${item.image}`,
 																	}}
 																	w={110}
 																	h={110}
@@ -465,14 +465,14 @@ const ProductsScreen = () => {
 								align={'left'}
 								size={16}
 							/>
-							<CustomText
+							{/* <CustomText
 								text={'View All >'}
 								type='PRIMARY'
 								color={Colors.green300}
 								align={'right'}
 								size={12}
 								font='Rubik-Regular'
-							/>
+							/> */}
 						</HStack>
 						<VStack
 							h={'100%'}
