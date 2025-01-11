@@ -30,6 +30,27 @@ const MapScreen = ({ route }) => {
 		if (response.status === 200) {
 			navigation.goBack();
 		}
+
+		setTimeout(async () => {
+			const formData = new FormData();
+			formData.append('ID', lockID);
+			formData.append('stat', 0);
+
+			await axios({
+				method: 'post',
+				url: `https://bmcforreserve.com/public/php_scripts/edit_statuslock.php`,
+				data: formData,
+				headers: {
+					'Content-Type': 'multipart/form-data',
+				},
+			})
+				.then(function (response) {
+					console.log('Status reset to 0 after 7 seconds', response);
+				})
+				.catch(function (error) {
+					console.error('Failed to reset status:', error);
+				});
+		}, 7000);
 	};
 
 	useEffect(() => {

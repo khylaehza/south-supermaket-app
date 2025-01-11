@@ -122,7 +122,7 @@ const CustomFlatList = ({
 										>
 											<Image
 												source={{
-													uri: `https://southsupermarket.store/${item.image}`,
+													uri: `https://bmcforreserve.com/uploads/${item.image}`,
 												}}
 												size='sm'
 												objectFit='cover'

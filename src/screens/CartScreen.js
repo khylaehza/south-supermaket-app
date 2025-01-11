@@ -310,7 +310,6 @@ const CartScreen = () => {
 									height={'100%'}
 								>
 									{Object.values(cart).map((item, key) => {
-									
 										if (item.quantity > 0) {
 											return (
 												<HStack
@@ -326,13 +325,12 @@ const CartScreen = () => {
 													key={key}
 												>
 													<CustomNumSel
-													item={item}
+														item={item}
 														value={item.quantity}
-														
 													/>
-																		<Image
+													<Image
 														source={{
-															uri: `https://southsupermarket.store/${item.image}`,
+															uri: `https://bmcforreserve.com/uploads/${item.image}`,
 														}}
 														size={'xs'}
 														h={'50%'}

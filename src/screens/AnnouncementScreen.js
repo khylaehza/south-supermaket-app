@@ -1,4 +1,4 @@
-import { View,  ScrollView,  } from 'react-native';
+import { View, ScrollView } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Styles } from '../themes';
 import { HStack, Box, VStack, Button, Image } from '@gluestack-ui/themed';
@@ -7,7 +7,6 @@ import { Colors } from '../themes';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { useData } from '../../DataContext';
-
 
 const AnnouncementScreen = () => {
 	const navigation = useNavigation();
@@ -108,7 +107,7 @@ const AnnouncementScreen = () => {
 													/>
 													<Image
 														source={{
-															uri: `https://southsupermarket.store/${item.image}`,
+															uri: `https://bmcforreserve.com/uploads/${item.image}`,
 														}}
 														size={'xs'}
 														h={'50%'}

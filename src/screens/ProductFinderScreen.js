@@ -74,9 +74,7 @@ const ProductFinderScreen = () => {
 		navigation.navigate('Announcement');
 	};
 
-
 	const connectWifi = async () => {
-		
 		try {
 			const state = await TetheringManager.isWifiEnabled();
 
@@ -177,7 +175,7 @@ const ProductFinderScreen = () => {
 								)}
 							</Button>
 						</Box>
-						<Box >
+						<Box>
 							<CustomText
 								text={'FINDER'}
 								type='PRIMARY'
@@ -185,10 +183,7 @@ const ProductFinderScreen = () => {
 								size={18}
 							/>
 						</Box>
-						<Box
-							
-							alignItems='flex-end'
-						>
+						<Box alignItems='flex-end'>
 							<Button
 								size='sm'
 								variant='link'

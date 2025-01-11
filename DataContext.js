@@ -8,14 +8,15 @@ export const useData = () => {
 	return useContext(DataContext);
 };
 const DataProvider = ({ children }) => {
-	const url = 'https://southsupermarket.store/php_scripts';
+	const url = 'https://bmcforreserve.com/public/php_scripts';
 	const [cart, setCart] = useState([]);
 	const [curUser, setCurUser] = useState({});
 	const [products, setProducts] = useState([{}]);
 	const [approvalUrl, setApprovalUrl] = useState(null);
 	const [refreshing, setRefreshing] = useState(true);
-const [announcement, setAnnouncement] = useState([]);
+	const [announcement, setAnnouncement] = useState([]);
 	const [users, setUsers] = useState([]);
+
 	useEffect(() => {
 		fetchUsers();
 
@@ -141,6 +142,19 @@ const [announcement, setAnnouncement] = useState([]);
 		return () => clearInterval(intervalId);
 	}, [sales, setSales]);
 
+	const [lock, setLock] = useState([{}]);
+	useEffect(() => {
+		const fetchData = async () => {
+			try {
+				const response = await axios.get(`${url}/GetLock2.php`);
+				setLock(response.data);
+			} catch (error) {
+				console.log('error');
+			}
+		};
+
+		fetchData();
+	}, []);
 	const value = {
 		url,
 		products,
@@ -157,6 +171,7 @@ const [announcement, setAnnouncement] = useState([]);
 		sales,
 		fetchUsers,
 		announcement,
+		lock,
 	};
 
 	return (

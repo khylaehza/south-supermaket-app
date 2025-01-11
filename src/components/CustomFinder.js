@@ -18,7 +18,7 @@ import TetheringManager, {
 	Event,
 	TetheringError,
 } from '@react-native-tethering/wifi';
-
+import { useState } from 'react';
 const CustomFinder = ({
 	itemData,
 	maxW = 105,
@@ -30,17 +30,67 @@ const CustomFinder = ({
 	searchVal = '',
 }) => {
 	const navigation = useNavigation();
+	const [lockID, setLockID] = useState();
+	const { lock } = useData();
 
 	const ViewPress = async (item) => {
 		const NODEMCU_IP_ADDRESS = '192.168.254.108';
 		const NODEMCU_PORT = 80;
 		const ip = TetheringManager.getDeviceIP();
 		const url = `http://${NODEMCU_IP_ADDRESS}:${NODEMCU_PORT}/${item.prod_code}`;
+		const matchedLock = lock.find((l) => l.post === item.prod_post);
+		if (matchedLock) {
+			setLockID(matchedLock.ID);
+		}
 
 		try {
 			const response = await axios.get(url);
-			console.log(response);
+
+			const formData = new FormData();
+			formData.append('ID', Number(lockID));
+			formData.append('stat', 1);
+
+			await axios({
+				method: 'post',
+				url: `https://bmcforreserve.com/public/php_scripts/edit_statuslock.php`,
+				data: formData,
+				headers: {
+					'Content-Type': 'multipart/form-data',
+				},
+			})
+				.then(function (response) {
+					console.log(response);
+				})
+				.catch(function (error) {
+					console.error('1', error);
+				});
+
+			setTimeout(async () => {
+				const formData = new FormData();
+				formData.append('ID', lockID);
+				formData.append('stat', 0);
+
+				await axios({
+					method: 'post',
+					url: `${url}/edit_statuslock.php`,
+					data: formData,
+					headers: {
+						'Content-Type': 'multipart/form-data',
+					},
+				})
+					.then(function (response) {
+						console.log(
+							'Status reset to 0 after 7 seconds',
+							response
+						);
+					})
+					.catch(function (error) {
+						console.error('Failed to reset status:', error);
+					});
+			}, 7000);
+
 			navigation.navigate('Map');
+			//
 		} catch (error) {
 			ToastAndroid.showWithGravity(
 				error.message,
@@ -49,8 +99,6 @@ const CustomFinder = ({
 			);
 		}
 	};
-
-	const { setCart, cart } = useData();
 
 	return (
 		<View
@@ -116,7 +164,7 @@ const CustomFinder = ({
 								>
 									<Image
 										source={{
-											uri: `https://southsupermarket.store/${item.image}`,
+											uri: `https://bmcforreserve.com/uploads/${item.image}`,
 										}}
 										size='sm'
 										objectFit='cover'

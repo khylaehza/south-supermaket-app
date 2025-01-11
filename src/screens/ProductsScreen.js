@@ -10,11 +10,7 @@ import {
 	AddIcon,
 	Icon,
 } from '@gluestack-ui/themed';
-import {
-	CustomText,
-	CustomSearch,
-	CustomFlatList,
-} from '../components';
+import { CustomText, CustomSearch, CustomFlatList } from '../components';
 import { Colors } from '../themes';
 import { useForm } from 'react-hook-form';
 import { Ionicons, Entypo, MaterialIcons } from '@expo/vector-icons';
@@ -50,7 +46,6 @@ const ProductsScreen = () => {
 		navigation.navigate('Announcement');
 	};
 
-
 	const { products, discProducts, setCart, cart, announcement } = useData();
 
 	const onAddToCart = (item) => {
@@ -72,9 +67,6 @@ const ProductsScreen = () => {
 			},
 		}));
 	};
-
-
-
 
 	return (
 		<View
@@ -137,7 +129,7 @@ const ProductsScreen = () => {
 								)}
 							</Button>
 						</Box>
-						<Box >
+						<Box>
 							<CustomText
 								text={'PRODUCTS'}
 								type='PRIMARY'
@@ -145,10 +137,7 @@ const ProductsScreen = () => {
 								size={18}
 							/>
 						</Box>
-						<Box
-							
-							alignItems='flex-end'
-						>
+						<Box alignItems='flex-end'>
 							<Button
 								size='sm'
 								variant='link'
@@ -310,7 +299,7 @@ const ProductsScreen = () => {
 															>
 																<Image
 																	source={{
-																		uri: `https://southsupermarket.store/${item.image}`,
+																		uri: `https://bmcforreserve.com/uploads/${item.image}`,
 																	}}
 																	w={110}
 																	h={110}

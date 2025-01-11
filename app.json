@@ -29,9 +29,11 @@
         "ACCESS_FINE_LOCATION",
         "ACCESS_COARSE_LOCATION",
         "CHANGE_NETWORK_STATE",
-        "WRITE_SETTINGS"
+        "WRITE_SETTINGS",
+        "android.permission.CAMERA",
+        "android.permission.RECORD_AUDIO"
       ],
-      "package": "com.kirei123.southsupermarket"
+      "package": "com.khylaehza.southsupermarket"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -55,8 +57,9 @@
     ],
     "extra": {
       "eas": {
-        "projectId": "5e6ca356-ad5f-470c-85b8-729e9878cc02"
+        "projectId": "74f89f01-6419-4cb8-bedc-a35f89adb28e"
       }
-    }
+    },
+    "owner": "khylaehza"
   }
 }
