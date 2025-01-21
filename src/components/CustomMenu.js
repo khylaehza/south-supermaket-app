@@ -12,7 +12,6 @@ import { Entypo } from '@expo/vector-icons';
 import { Colors } from '../themes';
 import CustomText from './CustomText';
 
-
 const CustomMenu = ({ method, setMethod, setValue, value, accords }) => {
 	return (
 		<Accordion
@@ -23,7 +22,7 @@ const CustomMenu = ({ method, setMethod, setValue, value, accords }) => {
 			bgColor='#F8ECDD'
 			rounded={10}
 		>
-			{accords.map((item, key) => (
+			{accords?.map((item, key) => (
 				<AccordionItem
 					value={item.value}
 					key={key}
@@ -103,6 +102,7 @@ const CustomMenu = ({ method, setMethod, setValue, value, accords }) => {
 							}}
 						</AccordionTrigger>
 					</AccordionHeader>
+
 					{item.sub && (
 						<AccordionContent>
 							<Box

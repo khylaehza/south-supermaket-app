@@ -22,7 +22,7 @@ const DataProvider = ({ children }) => {
 		fetchUsers();
 		const interval = setInterval(() => {
 			fetchUsers();
-		}, 30000);
+		}, 3000);
 
 		return () => clearInterval(interval);
 	}, []);
@@ -56,7 +56,7 @@ const DataProvider = ({ children }) => {
 				)
 			);
 			setCart(updatedCart);
-		}, 50000);
+		}, 500);
 
 		return () => clearInterval(intervalId);
 	}, [cart]);
@@ -114,7 +114,7 @@ const DataProvider = ({ children }) => {
 
 	useEffect(() => {
 		fetchTrans();
-		const intervalId = setInterval(fetchTrans, 50000);
+		const intervalId = setInterval(fetchTrans, 5000);
 		return () => clearInterval(intervalId);
 	}, [curUser.id]); // Only depend on curUser.id to prevent infinite loop
 
@@ -140,7 +140,7 @@ const DataProvider = ({ children }) => {
 
 	useEffect(() => {
 		fetchSales();
-		const intervalId = setInterval(fetchSales, 50000);
+		const intervalId = setInterval(fetchSales, 5000);
 		return () => clearInterval(intervalId);
 	}, [curUser.id]); // Only depend on curUser.id to prevent infinite loop
 

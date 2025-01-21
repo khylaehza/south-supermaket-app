@@ -9,6 +9,7 @@ import { Colors } from '../themes';
 import moment from 'moment';
 import { RefNoGenerator } from '../utilities/RefNoGenerator';
 const TopPaypalScreen = ({ route }) => {
+	console.log('here at toppaypal');
 	const { accessToken, type } = route.params;
 	const navigation = useNavigation();
 	const { approvalUrl, setApprovalUrl, url, curUser, cart } = useData();
@@ -42,6 +43,7 @@ const TopPaypalScreen = ({ route }) => {
 							navigation.navigate('Success');
 						})
 						.catch(function (response) {
+							console.log('toppaypal error');
 							console.log(response);
 						});
 				})
@@ -57,7 +59,96 @@ const TopPaypalScreen = ({ route }) => {
 		if (
 			webViewState.url.includes('https://refresh-load.firebaseapp.com/')
 		) {
+			console.log('change web');
 			setApprovalUrl(null);
+
+			const queryParams = webViewState.url.split('&');
+
+			const paymentIdPair = queryParams.find((param) =>
+				param.includes('paymentId=')
+			);
+
+			const paymentId = paymentIdPair
+				? paymentIdPair.split('=')[1]
+				: null;
+
+			const payerIdPair = queryParams.find((param) =>
+				param.includes('PayerID=')
+			);
+			const payerId = payerIdPair ? payerIdPair.split('=')[1] : null;
+
+			await axios
+				.post(
+					`https://api.sandbox.paypal.com/v1/payments/payment/${paymentId}/execute`,
+					{ payer_id: payerId },
+					{
+						headers: {
+							'Content-Type': 'application/json',
+							Authorization: `Bearer ${accessToken}`,
+						},
+					}
+				)
+				.then(async (res) => {
+					if (type == 'Cash-In') {
+						await axios({
+							method: 'post',
+							url: `${url}/update_balance.php`,
+							data: {
+								id: Number(curUser.id),
+								new_balance: Number(
+									res.data.transactions[0].amount.total
+								),
+								operation: 'add',
+							},
+							headers: {
+								'Content-Type': 'multipart/form-data',
+							},
+						})
+							.then(async function (response) {
+								console.log(response);
+							})
+							.catch(function (response) {
+								console.log(response);
+							});
+					} else {
+						postDataToServer();
+					}
+
+					await axios({
+						method: 'post',
+						url: `${url}/add_transaction.php`,
+						data: {
+							user_id: Number(curUser.id),
+							type: type,
+							method: 'Paypal',
+							amount: Number(
+								res.data.transactions[0].amount.total
+							),
+							date: moment().format('MMM DD, YYYY').toString(),
+							time: moment().format('hh:mm A').toString(),
+							ref: refNo,
+						},
+						headers: {
+							'Content-Type': 'multipart/form-data',
+						},
+					})
+						.then(function (res) {
+							setApprovalUrl(null);
+							navigation.navigate('Success');
+						})
+						.catch(function (response) {
+							console.log(response);
+							navigation.navigate('Failed');
+						});
+
+					if (response.name == 'INVALID_RESOURCE_ID') {
+						setApprovalUrl(null);
+						navigation.navigate('Failed');
+					}
+				})
+				.catch((err) => {
+					console.log({ ...err });
+				});
 		}
 	};
 

@@ -11,3 +11,4 @@ export { default as CustomModal } from './CustomModal';
 export { default as CustomNumSel } from './CustomNumSel';
 export { default as CustomModal2 } from './CustomModal2';
 export { default as CustomFinder } from './CustomFinder';
+export { default as CustomRadio } from './CustomRadio';

@@ -2,12 +2,7 @@ import { View, ActivityIndicator } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Styles } from '../themes';
 import { useForm } from 'react-hook-form';
-import {
-	HStack,
-	Box,
-	VStack,
-	Button,
-} from '@gluestack-ui/themed';
+import { HStack, Box, VStack, Button } from '@gluestack-ui/themed';
 import {
 	CustomText,
 	CustomButton,
@@ -68,8 +63,8 @@ const CashInAmtScreen = ({ route }) => {
 				}
 			)
 			.then((res) => {
-				setAccessToken(res.data.access_token);
-				
+				setAccessToken(res.data.access_token, amt);
+				console.log(res.data.access_token, 'accesss token');
 				axios
 					.post(
 						'https://api.sandbox.paypal.com/v1/payments/payment',
@@ -99,11 +94,11 @@ const CashInAmtScreen = ({ route }) => {
 					})
 					.catch((err) => {
 						console.log({ ...err });
+						console.log('error in paypal');
 					});
 			})
 			.catch((err) => {
-				console.log(err),
-
+				console.log(err), console.log('error in paypal');
 				console.log({ ...err });
 			});
 	};

@@ -46,10 +46,10 @@ const CustomInput = ({
 		},
 		error: {
 			color: Colors.red100,
+			fontSize: 12.2,
 			alignSelf: 'stretch',
 			top: -5,
 			left: 3,
-			fontSize: 12.2,
 			fontFamily: 'Rubik-Regular',
 		},
 	});

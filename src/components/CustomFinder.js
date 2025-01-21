@@ -30,7 +30,8 @@ const CustomFinder = ({
 	const { lock } = useData();
 
 	const ViewPress = async (item) => {
-		const NODEMCU_IP_ADDRESS = '192.168.254.108';
+		// const NODEMCU_IP_ADDRESS = '192.168.254.108';
+		const NODEMCU_IP_ADDRESS = '192.168.43.247';
 		const NODEMCU_PORT = 80;
 
 		const url = `http://${NODEMCU_IP_ADDRESS}:${NODEMCU_PORT}/${item.prod_code}`;
@@ -41,6 +42,10 @@ const CustomFinder = ({
 
 		try {
 			const response = await axios.get(url);
+
+			if (response.status === 200) {
+				console.log('blink');
+			}
 
 			const formData = new FormData();
 			formData.append('ID', Number(lockID));

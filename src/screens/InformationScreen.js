@@ -136,9 +136,9 @@ const InformationScreen = () => {
 						>
 							<Image
 								source={
-									curUser.image
+									curUser?.image
 										? {
-												uri: curUser.image,
+												uri: curUser?.image,
 											}
 										: require('../../assets/imgs/no_profile.png')
 								}
@@ -160,13 +160,13 @@ const InformationScreen = () => {
 							>
 								<CustomText
 									text={
-										curUser.mname
-											? `${curUser.fname} ${curUser.mname
+										curUser?.mname
+											? `${curUser?.fname} ${curUser?.mname
 													.chartAt(0)
 													.toUpperCase()} ${
-													curUser.lname
+													curUser?.lname
 												}`
-											: `${curUser.fname} ${curUser.lname}`
+											: `${curUser?.fname} ${curUser?.lname}`
 									}
 									type='PRIMARY'
 									color={Colors.green300}
@@ -180,7 +180,7 @@ const InformationScreen = () => {
 								rounded={5}
 							>
 								<CustomText
-									text={curUser.address}
+									text={curUser?.address}
 									type='PRIMARY'
 									color={Colors.green300}
 									size={18}
@@ -193,7 +193,7 @@ const InformationScreen = () => {
 								rounded={5}
 							>
 								<CustomText
-									text={curUser.contact}
+									text={curUser?.contact}
 									type='PRIMARY'
 									color={Colors.green300}
 									size={18}
@@ -206,7 +206,7 @@ const InformationScreen = () => {
 								rounded={5}
 							>
 								<CustomText
-									text={curUser.date}
+									text={curUser?.date}
 									type='PRIMARY'
 									color={Colors.green300}
 									size={18}

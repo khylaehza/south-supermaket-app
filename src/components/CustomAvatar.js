@@ -59,7 +59,8 @@ const CustomAvatar = ({ fname, lname, image }) => {
 							: require('../../assets/imgs/no_profile.png')
 					}
 					alt={'avatar'}
-					resizeMode='contain'
+					resizeMode='cover'
+					style={{ borderRadius: 100, width: '100%', height: '100%' }}
 					// size='500px'
 				/>
 			</Avatar>

@@ -13,7 +13,12 @@ import {
 } from '@gluestack-ui/themed';
 import { CustomText } from '../components';
 import { Colors } from '../themes';
-import { Ionicons, AntDesign, Feather, MaterialIcons } from '@expo/vector-icons';
+import {
+	Ionicons,
+	AntDesign,
+	Feather,
+	MaterialIcons,
+} from '@expo/vector-icons';
 import { useData } from '../../DataContext';
 import { useNavigation } from '@react-navigation/native';
 const ProfileScreen = () => {
@@ -28,7 +33,6 @@ const ProfileScreen = () => {
 	const onAnnouncePress = () => {
 		navigation.navigate('Announcement');
 	};
-
 
 	const items = [
 		{
@@ -173,10 +177,7 @@ const ProfileScreen = () => {
 								size={18}
 							/>
 						</Box>
-						<Box
-							
-							alignItems='flex-end'
-						>
+						<Box alignItems='flex-end'>
 							<Button
 								size='sm'
 								variant='link'
@@ -234,8 +235,13 @@ const ProfileScreen = () => {
 								alt={'avatar'}
 								resizeMode='contain'
 								// size='500px'
-								h={'100%'}
-								w={'100%'}
+								// h={'100%'}
+								// w={'100%'}
+								style={{
+									borderRadius: 100,
+									width: '100%',
+									height: '100%',
+								}}
 							/>
 						</Avatar>
 						<CustomText

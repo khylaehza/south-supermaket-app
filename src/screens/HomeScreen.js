@@ -1,6 +1,4 @@
-import {
-	View,
-} from 'react-native';
+import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Styles } from '../themes';
 import { HStack, Box, Image, VStack, Button } from '@gluestack-ui/themed';
@@ -112,7 +110,9 @@ const HomeScreen = () => {
 										top={0}
 									>
 										<CustomText
-											text={Object.keys(announcement).length}
+											text={
+												Object.keys(announcement).length
+											}
 											type='PRIMARY'
 											color={Colors.white200}
 											align={'left'}

@@ -2,7 +2,7 @@ import { View, StyleSheet, ScrollView, ActivityIndicator } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Styles } from '../themes';
 import { HStack, Box, VStack, Button, Image } from '@gluestack-ui/themed';
-import { CustomText, CustomNumSel } from '../components';
+import { CustomText, CustomNumSel, CustomButton } from '../components';
 import { Colors } from '../themes';
 import { Ionicons, AntDesign } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
@@ -487,11 +487,11 @@ const CartScreen = () => {
 									font='Rubik-Regular'
 								/>
 							</HStack>
-							{/* <CustomButton
+							<CustomButton
 								text='CHECK-OUT'
 								onPress={Checkout}
 								type='PRIMARY'
-							/> */}
+							/>
 						</Box>
 					)}
 				</View>

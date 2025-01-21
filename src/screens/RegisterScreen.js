@@ -6,8 +6,9 @@ import {
 	Image,
 	ScrollView,
 	ToastAndroid,
+	Platform,
 } from 'react-native';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { useForm } from 'react-hook-form';
 import { SimpleLineIcons } from '@expo/vector-icons';
@@ -24,6 +25,7 @@ const FormData = global.FormData;
 const RegisterScreen = () => {
 	const navigation = useNavigation();
 	const [image, setImage] = useState(null);
+	const [errorMessage, setErrorMessage] = useState('');
 	const id = IDGenerator(23);
 	const { url, curUser } = useData();
 
@@ -33,12 +35,12 @@ const RegisterScreen = () => {
 		formState: { errors },
 		watch,
 		reset,
+		setValue,
 	} = useForm({
 		values: {
 			role: 'user',
 			balance: '0',
 			date: moment().format('YYYY-MM-DD'),
-			image: image,
 			mname: '',
 			deletable: 1,
 			unique_num: 12121,
@@ -56,7 +58,23 @@ const RegisterScreen = () => {
 
 	const password = watch('password');
 
+	useEffect(() => {
+		const intervalId = setInterval(() => {
+			setValue('image', image);
+		}, 20);
+		return () => clearInterval(intervalId);
+	}, [setValue, image]);
+
 	const onOTPPress = async (info) => {
+		if (!image) {
+			setErrorMessage(
+				'Please upload a profile picture before submitting.'
+			);
+			return;
+		}
+
+		setErrorMessage('');
+
 		let uriParts = image.split('.');
 		let fileType = uriParts[uriParts.length - 1];
 
@@ -93,7 +111,8 @@ const RegisterScreen = () => {
 		})
 			.then(function (response) {
 				// console.log(response.data);
-
+				setImage(null);
+				setValue('image', null);
 				reset();
 				ToastAndroid.showWithGravity(
 					`Registration Successful! Please login.`,
@@ -255,6 +274,10 @@ const RegisterScreen = () => {
 						type={'password'}
 					/>
 
+					{errorMessage ? (
+						<Text style={styles.errorText}>{errorMessage}</Text>
+					) : null}
+
 					<CustomButton
 						text='Register '
 						onPress={handleSubmit(onOTPPress)}
@@ -307,6 +330,12 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		textAlign: 'center',
 		fontSize: 12,
+	},
+	errorText: {
+		color: Colors.red100,
+		fontSize: 12.2,
+		textAlign: 'center',
+		marginVertical: 10,
 	},
 });
 

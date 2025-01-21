@@ -15,8 +15,8 @@ import {
 	PaymentScreen,
 	ItemScreen,
 	CartScreen,
-	// PaymentBalScreen,
-	// ConfirmPurchaseScreen,
+	PaymentBalScreen,
+	ConfirmPurchaseScreen,
 	ProductFinderScreen,
 	SuccessScreen,
 	TopPaypalScreen,
@@ -243,10 +243,6 @@ const Navigator = () => {
 						name='Paymongo'
 						component={PaymongoScreen}
 					/>
-					{/* <Stack.Screen
-						name='OTP'
-						component={OTPScreen}
-					/>
 					<Stack.Screen
 						name='PayBal'
 						component={PaymentBalScreen}
@@ -254,10 +250,12 @@ const Navigator = () => {
 					<Stack.Screen
 						name='Confirm'
 						component={ConfirmPurchaseScreen}
-					/>		
-					
-					
-					
+					/>
+					{/* <Stack.Screen
+						name='OTP'
+						component={OTPScreen}
+					/>
+
 					
 					 */}
 				</Stack.Navigator>

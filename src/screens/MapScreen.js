@@ -21,7 +21,8 @@ const MapScreen = ({ route }) => {
 	const { cart } = useData();
 
 	const onBack = async () => {
-		const NODEMCU_IP_ADDRESS = '192.168.254.108';
+		// const NODEMCU_IP_ADDRESS = '192.168.254.108';
+		const NODEMCU_IP_ADDRESS = '192.168.43.247';
 		const NODEMCU_PORT = 80;
 
 		const url = `http://${NODEMCU_IP_ADDRESS}:${NODEMCU_PORT}/OFF`;
@@ -55,7 +56,8 @@ const MapScreen = ({ route }) => {
 
 	useEffect(() => {
 		const backAction = async () => {
-			const NODEMCU_IP_ADDRESS = '192.168.254.108';
+			// const NODEMCU_IP_ADDRESS = '192.168.254.108';
+			const NODEMCU_IP_ADDRESS = '192.168.43.247';
 			const NODEMCU_PORT = 80;
 
 			const url = `http://${NODEMCU_IP_ADDRESS}:${NODEMCU_PORT}/OFF`;
