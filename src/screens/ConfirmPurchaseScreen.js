@@ -12,6 +12,7 @@ import axios from 'axios';
 import WebView from 'react-native-webview';
 import { RefNoGenerator } from '../utilities/RefNoGenerator';
 import moment from 'moment';
+import { encode } from 'base-64';
 const ConfirmPurchaseScreen = ({ route }) => {
 	const insets = useSafeAreaInsets();
 	const navigation = useNavigation();
