@@ -13,8 +13,7 @@
 			"backgroundColor": "#ffffff"
 		},
 		"ios": {
-			"supportsTablet": true,
-			"bundleIdentifier": "com.khylaehza.southsupermarket"
+			"supportsTablet": true
 		},
 		"android": {
 			"adaptiveIcon": {
@@ -34,8 +33,7 @@
 				"WRITE_SETTINGS",
 				"android.permission.CAMERA",
 				"android.permission.RECORD_AUDIO"
-			],
-			"package": "com.khylaehza.southsupermarket"
+			]
 		},
 		"web": {
 			"favicon": "./assets/favicon.png"
@@ -56,12 +54,6 @@
 				}
 			],
 			"expo-font"
-		],
-		"extra": {
-			"eas": {
-				"projectId": "74f89f01-6419-4cb8-bedc-a35f89adb28e"
-			}
-		},
-		"owner": "khylaehza"
+		]
 	}
 }
