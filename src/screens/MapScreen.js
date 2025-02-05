@@ -14,6 +14,9 @@ const MapScreen = ({ route }) => {
 	const insets = useSafeAreaInsets();
 	const navigation = useNavigation();
 
+	const { prodPost } = route.params;
+	// console.log(prodPost);
+
 	const onCartPress = () => {
 		navigation.navigate('Cart');
 	};
@@ -21,39 +24,53 @@ const MapScreen = ({ route }) => {
 	const { cart } = useData();
 
 	const onBack = async () => {
-		// const NODEMCU_IP_ADDRESS = '192.168.254.108';
 		const NODEMCU_IP_ADDRESS = '192.168.43.247';
 		const NODEMCU_PORT = 80;
 
-		const url = `http://${NODEMCU_IP_ADDRESS}:${NODEMCU_PORT}/LEDL${item.prod_post}/OFF`;
-		const response = await axios.get(url);
+		const url = `http://${NODEMCU_IP_ADDRESS}:${NODEMCU_PORT}/LEDL${prodPost}/OFF`;
+		console.log(url);
+		try {
+			// const NODEMCU_IP_ADDRESS = '192.168.254.108';
 
-		if (response.status === 200) {
-			navigation.goBack();
-		}
+			// const response = await axios.get(url);
+			// console.log(response);
 
-		setTimeout(async () => {
-			const formData = new FormData();
-			formData.append('ID', lockID);
-			formData.append('stat', 0);
-
-			await axios({
-				method: 'post',
-				url: `https://southsupermarket.nickoaganan.tk/public/php_scripts/edit_statuslock.php`,
-				data: formData,
-				headers: {
-					'Content-Type': 'multipart/form-data',
-				},
-			})
-				.then(function (response) {
-					console.log('Status reset to 0 after 7 seconds', response);
+			axios
+				.get(url)
+				.then((response) => {
+					console.log('Response:', response.data);
+					navigation.goBack();
 				})
-				.catch(function (error) {
-					console.error('Failed to reset status:', error);
+				.catch((error) => {
+					console.error('Request failed:', error);
 				});
-		}, 7000);
 
-		navigation.goBack();
+			// setTimeout(async () => {
+			// 	const formData = new FormData();
+			// 	formData.append('ID', lockID);
+			// 	formData.append('stat', 0);
+
+			// 	await axios({
+			// 		method: 'post',
+			// 		url: `https://southsupermarket.nickoaganan.tk/public/php_scripts/edit_statuslock.php`,
+			// 		data: formData,
+			// 		headers: {
+			// 			'Content-Type': 'multipart/form-data',
+			// 		},
+			// 	})
+			// 		.then(function (response) {
+			// 			console.log(
+			// 				'Status reset to 0 after 7 seconds',
+			// 				response
+			// 			);
+			// 		})
+			// 		.catch(function (error) {
+			// 			console.error('Failed to reset status:', error);
+			// 		});
+			// }, 7000);
+		} catch (error) {
+			console.log(error);
+		}
 	};
 
 	useEffect(() => {
@@ -62,13 +79,12 @@ const MapScreen = ({ route }) => {
 			const NODEMCU_IP_ADDRESS = '192.168.43.247';
 			const NODEMCU_PORT = 80;
 
-			const url = `http://${NODEMCU_IP_ADDRESS}:${NODEMCU_PORT}/LEDL${item.prod_post}/OFF`;
+			const url = `http://${NODEMCU_IP_ADDRESS}:${NODEMCU_PORT}/LEDL${prodPost}/OFF`;
 			const response = await axios.get(url);
 
 			if (response.status === 200) {
 				navigation.goBack();
 			}
-			navigation.goBack();
 		};
 
 		const backHandler = BackHandler.addEventListener(
@@ -108,7 +124,7 @@ const MapScreen = ({ route }) => {
 								w={'33.3%'}
 								justifyContent='flex-start'
 								variant='link'
-								onPress={onBack}
+								onPress={() => onBack}
 							>
 								<Ionicons
 									name='chevron-back'

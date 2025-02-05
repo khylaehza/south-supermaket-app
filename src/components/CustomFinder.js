@@ -90,7 +90,7 @@ const CustomFinder = ({
 					});
 			}, 7000);
 
-			navigation.navigate('Map');
+			navigation.navigate('Map', { prodPost: item.prod_post });
 			//
 		} catch (error) {
 			ToastAndroid.showWithGravity(
