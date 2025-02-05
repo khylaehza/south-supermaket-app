@@ -52,6 +52,8 @@ const MapScreen = ({ route }) => {
 					console.error('Failed to reset status:', error);
 				});
 		}, 7000);
+
+		navigation.goBack();
 	};
 
 	useEffect(() => {
@@ -66,6 +68,7 @@ const MapScreen = ({ route }) => {
 			if (response.status === 200) {
 				navigation.goBack();
 			}
+			navigation.goBack();
 		};
 
 		const backHandler = BackHandler.addEventListener(
