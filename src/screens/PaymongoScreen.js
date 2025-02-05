@@ -7,15 +7,13 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useData } from '../../DataContext';
 import { Colors } from '../themes';
 import moment from 'moment';
-const PaymongoScreen = ({route}) => {
+const PaymongoScreen = ({ route }) => {
 	const { approvalUrl, setApprovalUrl, url, curUser } = useData();
 	const insets = useSafeAreaInsets();
 	const navigation = useNavigation();
 
 	const _onNavigationStateChange = async (webViewState) => {
-		if (
-			webViewState.url.includes('https://refresh-load.firebaseapp.com/')
-		) {
+		if (webViewState.url.includes('https://refresh-load.web.app/')) {
 			setApprovalUrl(null);
 			navigation.navigate('Success');
 		}

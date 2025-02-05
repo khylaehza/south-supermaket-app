@@ -47,7 +47,6 @@ const ProductsScreen = () => {
 	};
 
 	const { products, discProducts, setCart, cart, announcement } = useData();
-
 	const onAddToCart = (item) => {
 		// ToastAndroid.showWithGravity(
 		// 	`${item.description} Added to Cart!`,

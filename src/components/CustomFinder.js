@@ -34,7 +34,7 @@ const CustomFinder = ({
 		const NODEMCU_IP_ADDRESS = '192.168.43.247';
 		const NODEMCU_PORT = 80;
 
-		const url = `http://${NODEMCU_IP_ADDRESS}:${NODEMCU_PORT}/${item.prod_code}`;
+		const url = `http://${NODEMCU_IP_ADDRESS}:${NODEMCU_PORT}/LEDL${item.prod_post}`;
 		const matchedLock = lock.find((l) => l.post === item.prod_post);
 		if (matchedLock) {
 			setLockID(matchedLock.ID);

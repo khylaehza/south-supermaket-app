@@ -39,8 +39,8 @@ const CashInAmtScreen = ({ route }) => {
 			},
 		],
 		redirect_urls: {
-			return_url: 'https://refresh-load.firebaseapp.com/',
-			cancel_url: 'https://refresh-load.firebaseapp.com/',
+			return_url: 'https://refresh-load.web.app/',
+			cancel_url: 'https://refresh-load.web.app/',
 		},
 	};
 

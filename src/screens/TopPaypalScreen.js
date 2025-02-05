@@ -9,14 +9,15 @@ import { Colors } from '../themes';
 import moment from 'moment';
 import { RefNoGenerator } from '../utilities/RefNoGenerator';
 const TopPaypalScreen = ({ route }) => {
-	console.log('here at toppaypal');
 	const { accessToken, type } = route.params;
+	console.log('here at toppaypal', type);
 	const navigation = useNavigation();
 	const { approvalUrl, setApprovalUrl, url, curUser, cart } = useData();
 	const insets = useSafeAreaInsets();
 	const refNo = RefNoGenerator();
 
 	const postDataToServer = async () => {
+		console.log('post data to server');
 		try {
 			const responses = await Promise.all(
 				Object.values(cart).map((cart) => {
@@ -56,9 +57,8 @@ const TopPaypalScreen = ({ route }) => {
 	};
 
 	const _onNavigationStateChange = async (webViewState) => {
-		if (
-			webViewState.url.includes('https://refresh-load.firebaseapp.com/')
-		) {
+		console.log('reads on nav change');
+		if (webViewState.url.includes('https://refresh-load.web.app/')) {
 			console.log('change web');
 			setApprovalUrl(null);
 
@@ -111,6 +111,7 @@ const TopPaypalScreen = ({ route }) => {
 								console.log(response);
 							});
 					} else {
+						console.log('should post data here');
 						postDataToServer();
 					}
 
@@ -149,6 +150,8 @@ const TopPaypalScreen = ({ route }) => {
 				.catch((err) => {
 					console.log({ ...err });
 				});
+		} else {
+			console.log('not the web');
 		}
 	};
 
