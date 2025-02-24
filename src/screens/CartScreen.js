@@ -178,8 +178,10 @@ const CartScreen = () => {
 			headers: {
 				accept: 'application/json',
 				'content-type': 'application/json',
+				// authorization:
+				// 	'Basic c2tfdGVzdF9mZ3cyRG9wdEc5TGFDczFFTkhSaWFROWU6',
 				authorization:
-					'Basic c2tfdGVzdF9mZ3cyRG9wdEc5TGFDczFFTkhSaWFROWU6',
+					'Basic c2tfbGl2ZV9VWVU5WGJ1TnZxakpORFBXcnloOG5IUDE6c2tfbGl2ZV9VWVU5WGJ1TnZxakpORFBXcnloOG5IUDE=',
 			},
 			data: {
 				data: {

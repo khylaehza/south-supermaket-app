@@ -45,29 +45,29 @@ const MapScreen = ({ route }) => {
 					console.error('Request failed:', error);
 				});
 
-			// setTimeout(async () => {
-			// 	const formData = new FormData();
-			// 	formData.append('ID', lockID);
-			// 	formData.append('stat', 0);
+			setTimeout(async () => {
+				const formData = new FormData();
+				formData.append('ID', lockID);
+				formData.append('stat', 0);
 
-			// 	await axios({
-			// 		method: 'post',
-			// 		url: `https://southsupermarket.nickoaganan.tk/public/php_scripts/edit_statuslock.php`,
-			// 		data: formData,
-			// 		headers: {
-			// 			'Content-Type': 'multipart/form-data',
-			// 		},
-			// 	})
-			// 		.then(function (response) {
-			// 			console.log(
-			// 				'Status reset to 0 after 7 seconds',
-			// 				response
-			// 			);
-			// 		})
-			// 		.catch(function (error) {
-			// 			console.error('Failed to reset status:', error);
-			// 		});
-			// }, 7000);
+				await axios({
+					method: 'post',
+					url: `https://southsupermarket.nickoaganan.tk/public/php_scripts/edit_statuslock.php`,
+					data: formData,
+					headers: {
+						'Content-Type': 'multipart/form-data',
+					},
+				})
+					.then(function (response) {
+						console.log(
+							'Status reset to 0 after 7 seconds',
+							response
+						);
+					})
+					.catch(function (error) {
+						console.error('Failed to reset status:', error);
+					});
+			}, 7000);
 		} catch (error) {
 			console.log(error);
 		}
@@ -124,7 +124,7 @@ const MapScreen = ({ route }) => {
 								w={'33.3%'}
 								justifyContent='flex-start'
 								variant='link'
-								onPress={() => onBack}
+								onPress={() => onBack()}
 							>
 								<Ionicons
 									name='chevron-back'
