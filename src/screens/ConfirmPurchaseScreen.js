@@ -187,14 +187,15 @@ const ConfirmPurchaseScreen = ({ route }) => {
 					console.log(err);
 				});
 		} else {
+			console.log(clientKey);
 			const options = {
 				method: 'POST',
 				url: `https://api.paymongo.com/v1/payment_intents/${clientKey}/attach`,
+
 				headers: {
-					accept: 'application/json',
-					'content-type': 'application/json',
-					authorization:
-						'Basic c2tfdGVzdF9mZ3cyRG9wdEc5TGFDczFFTkhSaWFROWU6',
+					Accept: 'application/json',
+					'Content-Type': 'application/json',
+					Authorization: `Basic ${btoa('sk_live_UYU9XbuNvqjJNDPWryh8nHP1')}`,
 				},
 				data: {
 					data: {

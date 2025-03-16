@@ -172,16 +172,14 @@ const CartScreen = () => {
 	const Checkout = () => {
 		setLoading(true);
 		let amt = Number(totalAmount() * 100);
+		console.log(amt);
 		const options = {
 			method: 'POST',
 			url: 'https://api.paymongo.com/v1/payment_intents',
 			headers: {
-				accept: 'application/json',
-				'content-type': 'application/json',
-				// authorization:
-				// 	'Basic c2tfdGVzdF9mZ3cyRG9wdEc5TGFDczFFTkhSaWFROWU6',
-				authorization:
-					'Basic c2tfbGl2ZV9VWVU5WGJ1TnZxakpORFBXcnloOG5IUDE6c2tfbGl2ZV9VWVU5WGJ1TnZxakpORFBXcnloOG5IUDE=',
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+				Authorization: `Basic ${btoa('sk_live_UYU9XbuNvqjJNDPWryh8nHP1')}`,
 			},
 			data: {
 				data: {
@@ -193,9 +191,7 @@ const CartScreen = () => {
 							'paymaya',
 							'grab_pay',
 						],
-						// payment_method_options: {
-						// 	card: { request_three_d_secure: 'any' },
-						// },
+
 						currency: 'PHP',
 						capture_type: 'automatic',
 					},
@@ -213,9 +209,10 @@ const CartScreen = () => {
 					clientKey: response.data.data.id,
 					fullKey: response.data.data.attributes.client_key,
 				});
+				console.log(response);
 			})
 			.catch(function (error) {
-				console.error(error);
+				console.error('Error:', error.response?.data || error.message);
 			});
 	};
 

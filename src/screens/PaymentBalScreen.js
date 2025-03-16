@@ -131,17 +131,14 @@ const PaymentBalScreen = ({ route }) => {
 				type: value,
 			});
 		} else {
-			console.log('paymongo', method.toLowerCase());
 			const options = {
 				method: 'POST',
 				url: 'https://api.paymongo.com/v1/payment_methods',
+
 				headers: {
-					accept: 'application/json',
+					Accept: 'application/json',
 					'Content-Type': 'application/json',
-					// authorization:
-					// 	'Basic c2tfdGVzdF9mZ3cyRG9wdEc5TGFDczFFTkhSaWFROWU6',
-					authorization:
-						'Basic c2tfbGl2ZV9VWVU5WGJ1TnZxakpORFBXcnloOG5IUDE6c2tfbGl2ZV9VWVU5WGJ1TnZxakpORFBXcnloOG5IUDE=',
+					Authorization: `Basic ${btoa('sk_live_UYU9XbuNvqjJNDPWryh8nHP1')}`,
 				},
 				data: {
 					data: { attributes: { type: method?.toLowerCase() } },
@@ -151,7 +148,6 @@ const PaymentBalScreen = ({ route }) => {
 			await axios
 				.request(options)
 				.then(function (response) {
-					console.log('paymethodid', response.data.data.id);
 					setPayMethodId(response.data.data.id);
 
 					navigation.navigate('Confirm', {
@@ -163,7 +159,10 @@ const PaymentBalScreen = ({ route }) => {
 					});
 				})
 				.catch(function (error) {
-					console.error(error, 'error here');
+					console.error(
+						'Error:',
+						error.response?.data || error.message
+					);
 				});
 		}
 	};
