@@ -4,6 +4,7 @@
 		"name": "south-supermarket",
 		"slug": "south-supermarket",
 		"version": "1.0.0",
+
 		"orientation": "portrait",
 		"icon": "./assets/south-icon.png",
 		"userInterfaceStyle": "light",

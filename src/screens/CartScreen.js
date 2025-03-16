@@ -9,6 +9,7 @@ import { useNavigation } from '@react-navigation/native';
 import { useState } from 'react';
 import { useData } from '../../DataContext';
 import axios from 'axios';
+import { PAYMONGO_SECRET_KEY } from '@env';
 
 const CartScreen = () => {
 	const navigation = useNavigation();
@@ -156,6 +157,8 @@ const CartScreen = () => {
 		},
 	];
 
+	const secretKey = PAYMONGO_SECRET_KEY;
+
 	const totalAmount = () => {
 		let total = 0;
 		Object.values(cart).map((val) => {
@@ -179,7 +182,7 @@ const CartScreen = () => {
 			headers: {
 				Accept: 'application/json',
 				'Content-Type': 'application/json',
-				Authorization: `Basic ${btoa('sk_live_UYU9XbuNvqjJNDPWryh8nHP1')}`,
+				Authorization: `Basic ${btoa(secretKey)}`,
 			},
 			data: {
 				data: {

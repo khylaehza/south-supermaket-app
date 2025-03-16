@@ -13,8 +13,11 @@ import { useNavigation } from '@react-navigation/native';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
+import { PAYMONGO_SECRET_KEY } from '@env';
 const PaymentBalScreen = ({ route }) => {
 	const { clientKey, fullKey } = route.params;
+
+	const secretKey = PAYMONGO_SECRET_KEY;
 
 	const insets = useSafeAreaInsets();
 	const navigation = useNavigation();
@@ -138,7 +141,7 @@ const PaymentBalScreen = ({ route }) => {
 				headers: {
 					Accept: 'application/json',
 					'Content-Type': 'application/json',
-					Authorization: `Basic ${btoa('sk_live_UYU9XbuNvqjJNDPWryh8nHP1')}`,
+					Authorization: `Basic ${btoa(secretKey)}`,
 				},
 				data: {
 					data: { attributes: { type: method?.toLowerCase() } },

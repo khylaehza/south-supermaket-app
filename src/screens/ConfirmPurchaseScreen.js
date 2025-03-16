@@ -13,12 +13,15 @@ import WebView from 'react-native-webview';
 import { RefNoGenerator } from '../utilities/RefNoGenerator';
 import moment from 'moment';
 import { encode } from 'base-64';
+import { PAYMONGO_SECRET_KEY } from '@env';
 const ConfirmPurchaseScreen = ({ route }) => {
 	const insets = useSafeAreaInsets();
 	const navigation = useNavigation();
 	const { url, cart, curUser, approvalUrl, setApprovalUrl } = useData();
 	const { type, method, payMethodId, clientKey, fullKey } = route.params;
 	const [loading, setLoading] = useState(false);
+
+	const secretKey = PAYMONGO_SECRET_KEY;
 
 	const refNo = RefNoGenerator();
 	const totalAmount = () => {
@@ -195,7 +198,7 @@ const ConfirmPurchaseScreen = ({ route }) => {
 				headers: {
 					Accept: 'application/json',
 					'Content-Type': 'application/json',
-					Authorization: `Basic ${btoa('sk_live_UYU9XbuNvqjJNDPWryh8nHP1')}`,
+					Authorization: `Basic ${btoa(secretKey)}`,
 				},
 				data: {
 					data: {

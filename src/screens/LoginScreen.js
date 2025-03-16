@@ -13,8 +13,8 @@ import { useNavigation } from '@react-navigation/native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useData } from '../../DataContext';
 import { useState } from 'react';
-const 
-LoginScreen = () => {
+
+const LoginScreen = () => {
 	const navigation = useNavigation();
 	const {
 		control,
